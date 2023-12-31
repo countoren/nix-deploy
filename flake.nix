@@ -16,12 +16,16 @@
       name = "phone";
       runtimeInputs = with pkgs; [ gh git openssh ];
       text = ''
+        # we must install openssh globally in order gh to work correctly 
+        nix-on-droid switch --flake github:countoren/nix-deploy
         gh auth login
-        gh repo clone countoren/nixpkgs ~/nixpkgs
+        [ ! -d ~/nixpkgs ] && gh repo clone countoren/nixpkgs ~/nixpkgs
+        # switch to private repo
+        nix-on-droid switch --flake ~/nixpkgs
        '';
     };
     packages.default = self.packages.${system}.phone;
-  }) // {
+  }) // { 
        nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
          modules = [ 
 ({ pkgs, config, ... }:
