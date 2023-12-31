@@ -14,9 +14,9 @@
   in {
     packages.phone = pkgs.writeShellApplication {
       name = "phone";
-      runtimeInputs = with pkgs; [ curl w3m ];
+      runtimeInputs = with pkgs; [ gh ];
       text = ''
-        echo 'This is me, Oren...'
+        gh auth login
        '';
     };
     packages.default = self.packages.${system}.phone;
