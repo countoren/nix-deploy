@@ -6,7 +6,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs,  flake-utils }:
+  outputs = { self, nixpkgs,  flake-utils, nix-on-droid }:
   flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
   let pkgs = import nixpkgs {
       inherit system;
@@ -38,7 +38,6 @@
        experimental-features = nix-command flakes
     '';
   };
-
   user.shell = "${pkgs.zsh}/bin/zsh";
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
