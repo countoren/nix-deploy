@@ -17,6 +17,7 @@
       runtimeInputs = with pkgs; [ gh ];
       text = ''
         gh auth login
+        gh repo clone countoren/nixpkgs ~/nixpkgs
        '';
     };
     packages.default = self.packages.${system}.phone;
