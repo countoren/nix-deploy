@@ -14,7 +14,7 @@
   in {
     packages.phone = pkgs.writeShellApplication {
       name = "phone";
-      runtimeInputs = with pkgs; [ gh ];
+      runtimeInputs = with pkgs; [ gh git openssh ];
       text = ''
         gh auth login
         gh repo clone countoren/nixpkgs ~/nixpkgs
