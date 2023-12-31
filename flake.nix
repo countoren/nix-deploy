@@ -6,7 +6,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs,  flake-utils, nix-on-droid }:
+  outputs = { self, nixpkgs,  flake-utils }:
   flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
   let pkgs = import nixpkgs {
       inherit system;
@@ -31,6 +31,13 @@
     git
     github-cli
   ];
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+       experimental-features = nix-command flakes
+    '';
+  };
 
   user.shell = "${pkgs.zsh}/bin/zsh";
 
