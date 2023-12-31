@@ -13,5 +13,6 @@
         echo 'This is me, Oren...'
        '';
     };
+    packages.default = self.packages.${system}.phone;
   });
 }
